@@ -4,7 +4,7 @@
     let authAction;
     let reconnectTimeout;
 
-    // Track the active uploading dialog so we can close it when Unity replies
+    // Track the active uploading dialog so we can close it when Synthetic Selection replies
     let uploadingDialog;
     let reconnectDisabled = false;
 
@@ -77,7 +77,7 @@
         }
 
         reconnectDisabled = false;
-        console.log('SS_SYNC: Attempting to connect to Unity on ws://127.0.0.1:8764/blockbench ...');
+        console.log('SS_SYNC: Attempting to connect to Synthetic Selection on ws://127.0.0.1:8764/blockbench ...');
         socket = new WebSocket('ws://127.0.0.1:8764/blockbench');
 
         socket.onopen = function () {
@@ -126,7 +126,7 @@
 
                         Blockbench.showMessageBox({
                             title: 'Invalid Auth Token',
-                            message: 'Synthetic Selection rejected your Token.\n\nPlease check your token in the Unity Settings Menu (F10) and update it in Blockbench (Tools -> Connect to Synthetic Selection).',
+                            message: 'Synthetic Selection rejected your Token.\n\nPlease check your token in the In-Game Settings Menu (F10) and update it in Blockbench (Tools -> Connect to Synthetic Selection).',
                             icon: 'error'
                         });
                     } else {
@@ -147,7 +147,7 @@
         if (!socket || socket.readyState !== WebSocket.OPEN) {
             Blockbench.showMessageBox({
                 title: 'Not Connected',
-                message: 'You are not currently connected to Synthetic Selection. Please set your token from the Unity Settings Menu first.',
+                message: 'You are not currently connected to Synthetic Selection. Please set your token from the In-Game Settings Menu first.',
                 icon: 'warning'
             });
             return;
