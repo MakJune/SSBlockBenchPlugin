@@ -23,17 +23,25 @@
                 icon: 'vpn_key',
                 click: function () {
                     let currentToken = localStorage.getItem('ss_auth_token') || '';
-                    Blockbench.textPrompt(
-                        'Synthetic Selection Token',
-                        currentToken,
-                        function (token) {
+
+                    let authDialog = new Dialog({
+                        id: 'ss_auth_dialog',
+                        title: 'Connect to Synthetic Selection',
+                        form: {
+                            token: { label: 'Authentication Token', type: 'password', value: currentToken }
+                        },
+                        onConfirm: function (formData) {
+                            let token = formData.token;
                             if (token) {
                                 localStorage.setItem('ss_auth_token', token);
                                 Blockbench.showQuickMessage('Token Saved');
                                 connectWebSocket(token);
                             }
+                            this.hide();
                         }
-                    );
+                    });
+
+                    authDialog.show();
                 }
             });
 
